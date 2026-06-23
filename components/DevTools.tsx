@@ -11,6 +11,7 @@ import {
 import { AppData } from '../types';
 import { useTheme } from '../theme';
 import { today, localDateStr, daysBetween } from '../utils';
+import { supabase } from '../lib/supabase';
 
 interface Props {
   visible: boolean;
@@ -142,6 +143,11 @@ export default function DevTools({ visible, onClose, data, onUpdate }: Props) {
 
             <Section title="Danger zone" />
             <Row label="Reset everything & restart onboarding" onPress={resetAll} danger />
+            <Row
+              label="Sign out"
+              onPress={() => { supabase.auth.signOut(); onClose(); }}
+              danger
+            />
           </ScrollView>
         </Pressable>
       </Pressable>
